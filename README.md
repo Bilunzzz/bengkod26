@@ -1,4 +1,4 @@
-# Poliklinik App v2 - Fast Track
+# Poliklinik App
 
 Aplikasi manajemen poliklinik berbasis Laravel 11 untuk role Admin, Dokter, dan Pasien.
 
@@ -88,12 +88,6 @@ Command tersebut menjalankan:
 2. Kelola data obat dan stok.
 3. Verifikasi bukti pembayaran pasien.
 4. Lakukan export Excel dari menu dashboard/halaman terkait.
-
-## Dokumentasi Tambahan
-
-Panduan detail tersedia di:
-
-- `PANDUAN_PENGGUNAAN_FASTTRACK.md`
 
 ## License
 
