@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Poli;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -13,30 +14,46 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // nama, email, password, role
-        $users = [
+        $umumPoli = Poli::query()->where('nama_poli', 'Poli Umum')->first();
+
+        User::query()->updateOrCreate(
+            ['email' => 'admin@gmail.com'],
             [
                 'nama' => 'Admin',
-                'email' => 'admin@gmail.com',
-                'password' => Hash::make('admin'),
+                'alamat' => 'Klinik Pusat',
+                'no_ktp' => '0000000000000001',
+                'no_hp' => '081200000001',
                 'role' => 'admin',
-            ],
-            [
-                'nama' => 'Dokter',
-                'email' => 'dokter@gmail.com',
-                'password' => Hash::make('dokter'),
-                'role' => 'dokter',
-            ],
-            [
-                'nama' => 'Pasien',
-                'email' => 'pasien@gmail.com',
-                'password' => Hash::make('pasien'),
-                'role' => 'pasien',
-            ],
-        ];
+                'password' => Hash::make('admin'),
+                'id_poli' => null,
+            ]
+        );
 
-        foreach ($users as $user) {
-            User::create($user);
-        }
+        User::query()->updateOrCreate(
+            ['email' => 'dokter@gmail.com'],
+            [
+                'nama' => 'Dr. Dokter',
+                'alamat' => 'Semarang',
+                'no_ktp' => '0000000000000002',
+                'no_hp' => '081200000002',
+                'role' => 'dokter',
+                'password' => Hash::make('dokter'),
+                'id_poli' => $umumPoli?->id,
+            ]
+        );
+
+        User::query()->updateOrCreate(
+            ['email' => 'pasien@gmail.com'],
+            [
+                'nama' => 'Pasien Demo',
+                'alamat' => 'Semarang',
+                'no_ktp' => '0000000000000003',
+                'no_hp' => '081200000003',
+                'no_rm' => 'RM0001',
+                'role' => 'pasien',
+                'password' => Hash::make('pasien'),
+                'id_poli' => null,
+            ]
+        );
     }
 }
