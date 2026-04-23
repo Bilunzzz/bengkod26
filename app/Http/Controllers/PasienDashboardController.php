@@ -81,6 +81,11 @@ class PasienDashboardController extends Controller
             ->select('daftar_poli.id_jadwal', DB::raw('MAX(daftar_poli.no_antrian) as current_queue'))
             ->join('daftar_poli', 'periksa.id_daftar_poli', '=', 'daftar_poli.id')
             ->whereDate('periksa.tgl_periksa', today())
+            ->where(function ($query) {
+                $query
+                    ->whereNull('periksa.status_pembayaran')
+                    ->orWhere('periksa.status_pembayaran', '!=', 'lunas');
+            })
             ->groupBy('daftar_poli.id_jadwal')
             ->pluck('current_queue', 'daftar_poli.id_jadwal');
 
