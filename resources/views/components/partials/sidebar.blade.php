@@ -48,10 +48,22 @@
 					Dashboard Admin
 				</a>
 
+				<a href="{{ route('admin.dokter.index') }}"
+				   class="{{ $baseLink }} {{ request()->routeIs('admin.dokter.*') ? $active : $inactive }}">
+					<i class="fas fa-user-doctor w-4 text-center"></i>
+					Manajemen Dokter
+				</a>
+
 				<a href="{{ route('admin.obat.index') }}"
 				   class="{{ $baseLink }} {{ request()->routeIs('admin.obat.*') ? $active : $inactive }}">
 					<i class="fas fa-capsules w-4 text-center"></i>
 					Manajemen Obat
+				</a>
+
+				<a href="{{ route('admin.poli.index') }}"
+				   class="{{ $baseLink }} {{ request()->routeIs('admin.poli.*') ? $active : $inactive }}">
+					<i class="fas fa-hospital-user w-4 text-center"></i>
+					Manajemen Poli
 				</a>
 
 				<a href="{{ route('admin.pembayaran.index') }}"

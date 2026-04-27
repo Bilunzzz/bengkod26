@@ -78,7 +78,6 @@ class PasienDashboardController extends Controller
             ->first();
 
         $servedByJadwal = Periksa::query()
-            ->select('daftar_poli.id_jadwal', DB::raw('MAX(daftar_poli.no_antrian) as current_queue'))
             ->join('daftar_poli', 'periksa.id_daftar_poli', '=', 'daftar_poli.id')
             ->whereDate('periksa.tgl_periksa', today())
             ->where(function ($query) {
@@ -86,8 +85,14 @@ class PasienDashboardController extends Controller
                     ->whereNull('periksa.status_pembayaran')
                     ->orWhere('periksa.status_pembayaran', '!=', 'lunas');
             })
-            ->groupBy('daftar_poli.id_jadwal')
-            ->pluck('current_queue', 'daftar_poli.id_jadwal');
+            ->orderByDesc('periksa.tgl_periksa')
+            ->orderByDesc('periksa.id')
+            ->get([
+                'daftar_poli.id_jadwal',
+                'daftar_poli.no_antrian',
+            ])
+            ->unique('id_jadwal')
+            ->pluck('no_antrian', 'id_jadwal');
 
         $patientActiveByJadwal = DaftarPoli::query()
             ->where('id_pasien', $pasienId)

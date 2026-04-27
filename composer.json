@@ -52,6 +52,10 @@
         "dev": [
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#34d399,#fdba74\" \"php artisan serve\" \"php artisan reverb:start --host=0.0.0.0 --port=8080\" \"npm run dev\" --names=server,reverb,vite"
+        ],
+        "dev:roles": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#60a5fa,#f97316,#34d399,#facc15,#a78bfa\" \"APP_URL=http://127.0.0.1:8000 SESSION_COOKIE=poliklinik_admin_session php artisan serve --host=127.0.0.1 --port=8000\" \"APP_URL=http://127.0.0.1:8001 SESSION_COOKIE=poliklinik_dokter_session php artisan serve --host=127.0.0.1 --port=8001\" \"APP_URL=http://127.0.0.1:8002 SESSION_COOKIE=poliklinik_pasien_session php artisan serve --host=127.0.0.1 --port=8002\" \"php artisan reverb:start --host=0.0.0.0 --port=8080\" \"npm run dev\" --names=admin,dokter,pasien,reverb,vite"
         ]
     },
     "extra": {

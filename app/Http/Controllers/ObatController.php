@@ -46,4 +46,11 @@ class ObatController extends Controller
 
         return back()->with('success', 'Data obat berhasil diperbarui.');
     }
+
+    public function destroy(Obat $obat): RedirectResponse
+    {
+        $obat->delete();
+
+        return back()->with('success', 'Data obat berhasil dihapus.');
+    }
 }

@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DokterPeriksaController;
+use App\Http\Controllers\DokterController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienDashboardController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PoliController;
 use App\Http\Controllers\PasienRiwayatController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +29,17 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/obat', [ObatController::class, 'index'])->name('admin.obat.index');
     Route::post('/obat', [ObatController::class, 'store'])->name('admin.obat.store');
     Route::put('/obat/{obat}', [ObatController::class, 'update'])->name('admin.obat.update');
+    Route::delete('/obat/{obat}', [ObatController::class, 'destroy'])->name('admin.obat.destroy');
+
+    Route::get('/poli', [PoliController::class, 'index'])->name('admin.poli.index');
+    Route::post('/poli', [PoliController::class, 'store'])->name('admin.poli.store');
+    Route::put('/poli/{poli}', [PoliController::class, 'update'])->name('admin.poli.update');
+    Route::delete('/poli/{poli}', [PoliController::class, 'destroy'])->name('admin.poli.destroy');
+
+    Route::get('/dokter', [DokterController::class, 'index'])->name('admin.dokter.index');
+    Route::post('/dokter', [DokterController::class, 'store'])->name('admin.dokter.store');
+    Route::put('/dokter/{dokter}', [DokterController::class, 'update'])->name('admin.dokter.update');
+    Route::delete('/dokter/{dokter}', [DokterController::class, 'destroy'])->name('admin.dokter.destroy');
 
     Route::get('/export/dokter', [ExportController::class, 'adminDokter'])->name('admin.export.dokter');
     Route::get('/export/pasien', [ExportController::class, 'adminPasien'])->name('admin.export.pasien');

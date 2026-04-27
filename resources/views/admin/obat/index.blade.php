@@ -67,7 +67,14 @@
                                     <form id="update-obat-{{ $obat->id }}" action="{{ route('admin.obat.update', $obat) }}" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <button class="btn btn-sm btn-secondary rounded-lg px-4 normal-case" type="submit">Simpan</button>
+                                        <div class="flex items-center gap-2">
+                                            <button class="btn btn-sm btn-secondary rounded-lg px-4 normal-case" type="submit">Simpan</button>
+                                            <button class="btn btn-sm btn-error rounded-lg px-4 normal-case" type="submit" form="delete-obat-{{ $obat->id }}" onclick="return confirm('Hapus obat ini?')">Hapus</button>
+                                        </div>
+                                    </form>
+                                    <form id="delete-obat-{{ $obat->id }}" action="{{ route('admin.obat.destroy', $obat) }}" method="POST" class="hidden">
+                                        @csrf
+                                        @method('DELETE')
                                     </form>
                                 </td>
                             </tr>
